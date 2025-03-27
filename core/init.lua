@@ -133,19 +133,13 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
--- Handle startup: prevent empty buffer when starting Neovim
+-- Handle startup with the new buffer manager
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    -- Only run this if no arguments were passed (empty startup)
-    if vim.fn.argc() == 0 then
-      -- Close the initial empty buffer
-      vim.cmd("bd")
-      -- Open NvimTree
-      vim.cmd("NvimTreeToggle")
-    end
+    require("core.buffer_manager").handle_startup()
   end,
   group = vim.api.nvim_create_augroup("NvStartup", { clear = true }),
-  desc = "Start NvimTree on startup and close the empty initial buffer",
+  desc = "Handle startup and prevent empty buffers",
 })
 
 -- Open NvimTree automatically when opening a directory
@@ -156,6 +150,15 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
       require("nvim-tree.api").tree.open()
     end
   end,
+})
+
+-- Clean up empty buffers when a real file is loaded
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    require("core.buffer_manager").close_empty_unnamed_buffers()
+  end,
+  group = vim.api.nvim_create_augroup("BufferCleanup", { clear = true }),
+  desc = "Clean up empty unnamed buffers when a file is opened",
 })
 
 -------------------------------------- commands ------------------------------------------
