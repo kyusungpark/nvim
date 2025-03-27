@@ -70,6 +70,43 @@ return {
     end,
   },
 
+  -- Todo comments highlighting and searching
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("todo-comments").setup({
+        signs = true,      -- Show icons in the sign column
+        keywords = {
+          FIX = { icon = " ", color = "error" },
+          TODO = { icon = " ", color = "info" },
+          NOTE = { icon = " ", color = "hint" },
+        },
+        highlight = {
+          before = "",     -- "fg" or "bg" or empty
+          keyword = "wide", -- "fg", "bg", "wide" or empty
+          after = "fg",    -- "fg" or "bg" or empty
+          pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns
+          comments_only = true, -- uses treesitter to match keywords in comments only
+          max_line_len = 400, -- ignore lines longer than this
+          exclude = {}, -- list of file types to exclude highlighting
+        },
+        search = {
+          command = "rg",
+          args = {
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+          },
+          pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+        },
+      })
+    end,
+  },
+
   -- Auto save files
   "okuuva/auto-save.nvim",
     event = { "InsertLeave", "TextChanged" },
