@@ -11,6 +11,12 @@ return {
 
         -- GO
         "gopls",
+
+        -- Python
+        "pyright",
+        "black",
+        "mypy",
+        "ruff",
       }
     }
   },

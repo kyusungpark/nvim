@@ -2,17 +2,21 @@ local null_ls = require("null-ls")
 
 local formatting = null_ls.builtins.formatting
 local completion = null_ls.builtins.completion
+local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
   -- JavaScript/TypeScript formatting
-  formatting.prettier,
-
-  -- ESLint
   require("none-ls.diagnostics.eslint_d"),
+  formatting.prettier,
 
   -- Go formatting
   formatting.gofmt,
   formatting.goimports,
+
+  -- Python formatting
+  formatting.black,
+  diagnostics.mypy,
+  diagnostics.ruff,
 
   -- Additional sources
   formatting.stylua,
@@ -34,10 +38,10 @@ return {
         buffer = bufnr,
         callback = function()
           vim.lsp.buf.format({
-            bufnr = bufnr,
-            filter = function(client)
-              return client.name == "null-ls"
-            end
+            bufnr = bufnr
+            -- filter = function(client)
+            --   return client.name == "null-ls"
+            -- end
           })
         end,
       })

@@ -27,9 +27,26 @@ lspconfig.gopls.setup {
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  init_options = {
-    preferences = {
-      disableSuggestions = true,
-    },
-  },
+  filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
+  -- init_options = {
+    -- preferences = {
+      -- disableSuggestions = true,
+    -- },
+  -- },
+}
+
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "python" },
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoImportCompletions = true,
+        useLibraryCodeForTypes = true,
+      }
+    }
+  }
 }
