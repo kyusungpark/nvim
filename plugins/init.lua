@@ -73,7 +73,22 @@ local default_plugins = {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
-      return require "plugins.configs.treesitter"
+      local opts = require "plugins.configs.treesitter"
+      -- Add these languages to ensure_installed table
+      if opts.ensure_installed then
+        vim.list_extend(opts.ensure_installed, {
+          "javascript", "typescript", "tsx",
+          "html", "css", "json", "yaml", "markdown",
+          "go", "python"
+        })
+      else
+        opts.ensure_installed = {
+          "javascript", "typescript", "tsx",
+          "html", "css", "json", "yaml", "markdown",
+          "go", "python"
+        }
+      end
+      return opts
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
