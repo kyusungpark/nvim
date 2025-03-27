@@ -50,3 +50,10 @@ lspconfig.pyright.setup {
     }
   }
 }
+
+lspconfig.ruff.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "python" },
+  root_dir = util.root_pattern("pyproject.toml", ".git"),
+}

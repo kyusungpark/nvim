@@ -16,7 +16,6 @@ local sources = {
   -- Python formatting
   formatting.black,
   diagnostics.mypy,
-  diagnostics.ruff,
 
   -- Additional sources
   formatting.stylua,
