@@ -22,7 +22,7 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     lazy = false, -- Set to false to ensure it loads at startup
-    branch = "canary", -- Specify branch at the plugin level
+    branch = "main", -- Specify branch at the plugin level
     cmd = {
       "CopilotChat",
       "CopilotChatVisual",

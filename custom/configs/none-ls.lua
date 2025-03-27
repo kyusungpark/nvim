@@ -10,7 +10,7 @@ local sources = {
   formatting.prettier,
 
   -- Go formatting
-  formatting.gofmt,
+  formatting.gofumpt,
   formatting.goimports,
 
   -- Python formatting

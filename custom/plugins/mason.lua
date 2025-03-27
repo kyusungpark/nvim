@@ -17,6 +17,12 @@ return {
         "black",
         "mypy",
         "ruff",
+
+        -- HTML/CSS
+        "html-lsp",
+        "css-lsp",
+        "tailwindcss",
+        "emmet-ls",
       }
     }
   },
