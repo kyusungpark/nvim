@@ -133,30 +133,30 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
--- -- Handle startup: prevent empty buffer when starting Neovim
--- vim.api.nvim_create_autocmd("VimEnter", {
---   callback = function()
---     -- Only run this if no arguments were passed (empty startup)
---     if vim.fn.argc() == 0 then
---       -- Close the initial empty buffer
---       vim.cmd("bd")
---       -- Open NvimTree
---       vim.cmd("NvimTreeToggle")
---     end
---   end,
---   group = vim.api.nvim_create_augroup("NvStartup", { clear = true }),
---   desc = "Start NvimTree on startup and close the empty initial buffer",
--- })
+-- Handle startup: prevent empty buffer when starting Neovim
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    -- Only run this if no arguments were passed (empty startup)
+    if vim.fn.argc() == 0 then
+      -- Close the initial empty buffer
+      vim.cmd("bd")
+      -- Open NvimTree
+      vim.cmd("NvimTreeToggle")
+    end
+  end,
+  group = vim.api.nvim_create_augroup("NvStartup", { clear = true }),
+  desc = "Start NvimTree on startup and close the empty initial buffer",
+})
 
--- -- Open NvimTree automatically when opening a directory
--- vim.api.nvim_create_autocmd({ "VimEnter" }, {
---   callback = function()
---     -- Open NvimTree if opening a directory
---     if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
---       require("nvim-tree.api").tree.open()
---     end
---   end,
--- })
+-- Open NvimTree automatically when opening a directory
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    -- Open NvimTree if opening a directory
+    if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      require("nvim-tree.api").tree.open()
+    end
+  end,
+})
 
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
