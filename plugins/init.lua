@@ -216,6 +216,26 @@ local default_plugins = {
       local options = require "plugins.configs.nvimtree"
       options.view = options.view or {}
       options.view.side = "right"
+
+      -- Enable git integration
+      options.git = {
+        enable = true,
+        ignore = false,
+        timeout = 500,
+      }
+
+      -- Configure renderer to show git status
+      options.renderer = options.renderer or {}
+      options.renderer.icons = options.renderer.icons or {}
+      options.renderer.icons.show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = true,
+      }
+      options.renderer.highlight_git = true
+      options.renderer.icons.git_placement = "before"
+
       return options
     end,
     config = function(_, opts)
