@@ -2,9 +2,7 @@ return {
   -- GitHub Copilot
   {
     "github/copilot.vim",
-    branch = "canary",
     lazy = false,
-    dependencies = { "github/copilot.vim" },
     config = function()
       -- Enable Copilot for all filetypes
       vim.g.copilot_no_tab_map = true
@@ -21,8 +19,7 @@ return {
   -- Copilot Chat - For interactive chat and code edits
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    lazy = false, -- Set to false to ensure it loads at startup
-    branch = "main", -- Specify branch at the plugin level
+    lazy = false,
     cmd = {
       "CopilotChat",
       "CopilotChatVisual",
