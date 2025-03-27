@@ -14,4 +14,12 @@ M.window = {
    },
 }
 
+-- NvimTree mappings
+M.nvimtree = {
+   n = {
+      ["<leader>ee"] = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
+      ["<leader>ec"] = { "<cmd>NvimTreeCollapse<CR>", "Collapse NvimTree" },
+   },
+}
+
 return M

@@ -133,6 +133,26 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
+-- Open NvimTree automatically when opening a directory
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    -- Open NvimTree if opening a directory
+    if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      require("nvim-tree.api").tree.open()
+    end
+  end,
+})
+
+-- Open NvimTree if no file is specified
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    -- Check if the buffer is empty (no file opened)
+    if vim.fn.argc() == 0 then
+      require("nvim-tree.api").tree.open()
+    end
+  end,
+})
+
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command
 
