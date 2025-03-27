@@ -7,7 +7,6 @@ table.insert(plugins, require("custom.plugins.mason"))
 table.insert(plugins, require("custom.plugins.ai"))
 table.insert(plugins, require("custom.plugins.editor"))
 table.insert(plugins, require("custom.plugins.session"))
-table.insert(plugins, require("custom.plugins.highlight"))
 
 -- Flatten the plugins table
 local flattened_plugins = {}

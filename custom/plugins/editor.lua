@@ -57,4 +57,28 @@ return {
       end
     end,
   },
+
+  -- Highlights selected word
+  {
+    "RRethy/vim-illuminate",
+    event = "BufRead",
+    config = function()
+      require('illuminate').configure({
+        providers = { 'lsp', 'treesitter', 'regex' },
+        delay = 200, -- Delay before highlighting
+      })
+    end,
+  },
+
+  -- Auto save files
+  "okuuva/auto-save.nvim",
+    event = { "InsertLeave", "TextChanged" },
+    opts = {
+      enabled = true,
+      trigger_events = { "InsertLeave", "TextChanged", "TextChangedI" },
+      debounce_delay = 135,
+      execution_message = {
+        message = function() return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S") end,
+      },
+    },
 }
