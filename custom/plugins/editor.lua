@@ -107,6 +107,27 @@ return {
     end,
   },
 
+  -- Rename variables globally with preview
+  {
+    "smjonas/inc-rename.nvim",
+    event = "BufRead",
+    config = function()
+      require("inc_rename").setup({
+        input_buffer_type = "dressing",
+        preview_empty_name = false,  -- whether an empty new name should be previewed
+        show_message = true,         -- show a message after executing
+        cmd_name = "IncRename",      -- command name
+        hl_group = "Substitute",     -- highlight group used for highlighting the identifier's new name
+        ui_max_width = 0.5,          -- The maximum width of the UI window
+        ui_min_width = 20,           -- The minimum width of the UI window
+      })
+
+      vim.keymap.set("n", "<leader>rn", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, { expr = true, desc = "Rename variable globally" })
+    end,
+  },
+
   -- Auto save files
   "okuuva/auto-save.nvim",
     event = { "InsertLeave", "TextChanged" },
