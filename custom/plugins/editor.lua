@@ -139,4 +139,31 @@ return {
         message = function() return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S") end,
       },
     },
+
+  -- Comment code with / key
+  {
+    "numToStr/Comment.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("Comment").setup({
+        -- Use '/' for line comments
+        mappings = {
+          basic = false,
+          extra = false,
+        },
+      })
+
+      -- Map '/' to comment in normal mode
+      vim.keymap.set('n', '/', function()
+        require('Comment.api').toggle.linewise.current()
+        return '<ESC>'
+      end, { expr = true, desc = "Comment line" })
+
+      -- Map '/' to comment in visual mode
+      vim.keymap.set('x', '/', function()
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<ESC>', true, false, true), 'nx', false)
+        require('Comment.api').toggle.linewise(vim.fn.visualmode())
+      end, { desc = "Comment selection" })
+    end,
+  },
 }
