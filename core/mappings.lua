@@ -301,31 +301,6 @@ M.telescope = {
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
-    -- git
-    ["<leader>gc"] = {
-      function()
-        local message = vim.fn.input("Commit message: ")
-        if message ~= "" then
-          vim.cmd('!git commit -m "' .. message .. '"')
-        end
-      end,
-      "Git commit with message"
-    },
-    ["<leader>ga"] = { "<cmd> !git add . <CR>", "Git add all" },
-    ["<leader>gb"] = {
-      function()
-        local branch_name = vim.fn.input("Branch name: ")
-        if branch_name ~= "" then
-          vim.cmd('!git checkout -b "' .. branch_name .. '"')
-        end
-      end,
-      "Git create branch"
-    },
-    ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
-    ["<leader>gl"] = { "<cmd> !git pull <CR>", "Git pull" },
-    ["<leader>gp"] = { "<cmd> !git push <CR>", "Git push" },
-    ["<leader>gm"] = { "<cmd> !git checkout main <CR>", "Git checkout main" },
-
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
@@ -493,12 +468,36 @@ M.gitsigns = {
       "Preview hunk",
     },
 
+    ["<leader>gc"] = {
+      function()
+        local message = vim.fn.input("Commit message: ")
+        if message ~= "" then
+          vim.cmd('!git commit -m "' .. message .. '"')
+        end
+      end,
+      "Git commit with message"
+    },
     ["<leader>gb"] = {
       function()
-        package.loaded.gitsigns.blame_line()
+        local branch_name = vim.fn.input("Branch name: ")
+        if branch_name ~= "" then
+          vim.cmd('!git checkout -b "' .. branch_name .. '"')
+        end
       end,
-      "Blame line",
+      "Git create branch"
     },
+    ["<leader>ga"] = { "<cmd> !git add . <CR>", "Git add all" },
+    ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+    ["<leader>gl"] = { "<cmd> !git pull <CR>", "Git pull" },
+    ["<leader>gp"] = { "<cmd> !git push <CR>", "Git push" },
+    ["<leader>gm"] = { "<cmd> !git checkout main <CR>", "Git checkout main" },
+
+    -- ["<leader>gb"] = {
+    --   function()
+    --     package.loaded.gitsigns.blame_line()
+    --   end,
+    --   "Blame line",
+    -- },
 
     ["<leader>td"] = {
       function()
