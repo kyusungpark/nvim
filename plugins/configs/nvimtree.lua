@@ -2,6 +2,7 @@ local options = {
   filters = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
+    custom = { "^.git$", ".DS_Store" },  -- Add .DS_Store to the custom patterns
   },
   disable_netrw = true,
   hijack_netrw = true,
