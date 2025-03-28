@@ -129,16 +129,61 @@ return {
   },
 
   -- Auto save files
-  "okuuva/auto-save.nvim",
+  {
+    "okuuva/auto-save.nvim",
+    version = "^1.0.0", -- Use semver to ensure compatibility
+    cmd = "ASToggle",    -- Enable lazy loading via command
     event = { "InsertLeave", "TextChanged" },
     opts = {
       enabled = true,
-      trigger_events = { "InsertLeave", "TextChanged", "TextChangedI" },
-      debounce_delay = 135,
-      execution_message = {
-        message = function() return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S") end,
+      trigger_events = {
+        immediate_save = { "BufLeave", "FocusLost", "QuitPre", "VimSuspend" },
+        defer_save = { "InsertLeave", "TextChanged" },
+        cancel_deferred_save = { "InsertEnter" },
       },
+      -- Don't save special buffers
+      condition = function(buf)
+        -- Don't save if buffer is not modifiable
+        if not vim.bo[buf].modifiable then
+          return false
+        end
+        -- Don't save special buffers
+        if vim.bo[buf].buftype ~= "" then
+          return false
+        end
+        return true
+      end,
+      debounce_delay = 135, -- Reduced from default 1000ms
     },
+    config = function(_, opts)
+      -- Load the plugin
+      local auto_save = require("auto-save")
+
+      -- Setup with options
+      auto_save.setup(opts)
+
+      -- Create an autocmd group for auto-save notifications
+      local group = vim.api.nvim_create_augroup('autosave', {})
+
+      -- Show notification when a buffer is saved
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'AutoSaveWritePost',
+        group = group,
+        callback = function(args)
+          if args.data.saved_buffer ~= nil then
+            local filename = vim.fn.fnamemodify(
+              vim.api.nvim_buf_get_name(args.data.saved_buffer),
+              ":t"
+            )
+            vim.notify(
+              'AutoSave: saved ' .. filename .. ' at ' .. vim.fn.strftime('%H:%M:%S'),
+              vim.log.levels.INFO
+            )
+          end
+        end,
+      })
+    end,
+  },
 
   -- Comment code with / key
   {
