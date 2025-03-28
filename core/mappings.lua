@@ -312,6 +312,15 @@ M.telescope = {
       "Git commit with message"
     },
     ["<leader>ga"] = { "<cmd> !git add . <CR>", "Git add all" },
+    ["<leader>gb"] = {
+      function()
+        local branch_name = vim.fn.input("Branch name: ")
+        if branch_name ~= "" then
+          vim.cmd('!git checkout -b "' .. branch_name .. '"')
+        end
+      end,
+      "Git create branch"
+    },
     ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
     ["<leader>gl"] = { "<cmd> !git pull <CR>", "Git pull" },
     ["<leader>gp"] = { "<cmd> !git push <CR>", "Git push" },
