@@ -302,7 +302,6 @@ M.telescope = {
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
     -- git
-    ["<leader>gco"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
     ["<leader>gc"] = {
       function()
         local message = vim.fn.input("Commit message: ")
@@ -316,7 +315,7 @@ M.telescope = {
     ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
     ["<leader>gl"] = { "<cmd> !git pull <CR>", "Git pull" },
     ["<leader>gp"] = { "<cmd> !git push <CR>", "Git push" },
-    ["<leader>gcm"] = { "<cmd> !git checkout main <CR>", "Git checkout main" },
+    ["<leader>gm"] = { "<cmd> !git checkout main <CR>", "Git checkout main" },
 
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
