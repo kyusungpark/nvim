@@ -96,9 +96,32 @@ M.tabufline = {
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
-        require("nvchad.tabufline").close_buffer()
+        -- Check if buffer has unsaved changes
+        local current_buf = vim.api.nvim_get_current_buf()
+        if vim.bo[current_buf].modified then
+          vim.api.nvim_echo({{"Buffer has unsaved changes. Use <leader>X to force close or <leader>xs to save and close.", "WarningMsg"}}, true, {})
+        else
+          require("nvchad.tabufline").close_buffer()
+        end
       end,
       "Close buffer",
+    },
+
+    -- force close buffer without saving
+    ["<leader>X"] = {
+      function()
+        require("nvchad.tabufline").close_buffer(true)
+      end,
+      "Force close buffer",
+    },
+
+    -- save and close buffer
+    ["<leader>xs"] = {
+      function()
+        vim.cmd("w")
+        require("nvchad.tabufline").close_buffer()
+      end,
+      "Save and close buffer",
     },
   },
 }
@@ -474,6 +497,29 @@ M.gitsigns = {
         require("gitsigns").toggle_deleted()
       end,
       "Toggle deleted",
+    },
+
+    ["<leader>gd"] = {
+      function()
+        require("gitsigns").diffthis()
+      end,
+      "Diff this file",
+    },
+
+    ["<leader>gD"] = {
+      function()
+        require("gitsigns").diffthis("~")
+      end,
+      "Diff against last commit",
+    },
+
+    ["<leader>ghd"] = {
+      function()
+        require("gitsigns").toggle_linehl()
+        require("gitsigns").toggle_numhl()
+        require("gitsigns").toggle_word_diff()
+      end,
+      "Toggle diff highlighting",
     },
   },
 }
