@@ -30,9 +30,9 @@ lspconfig.ts_ls.setup {
   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsx" },
   root_dir = util.root_pattern("package.json", "tsconfig.json", ".git"),
   -- init_options = {
-    -- preferences = {
-      -- disableSuggestions = true,
-    -- },
+  --   preferences = {
+  --     disableSuggestions = true,
+  --   },
   -- },
 }
 

@@ -211,4 +211,90 @@ return {
       end, { desc = "Comment selection" })
     end,
   },
+
+  -- Status line
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VimEnter",
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "auto",
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+          globalstatus = true,
+          disabled_filetypes = {
+            statusline = { "dashboard", "alpha" },
+          },
+        },
+        sections = {
+          lualine_a = { { "mode", icon = "" } },
+          lualine_b = {
+            { "branch", icon = "" },
+            {
+              "diff",
+              symbols = {
+                added = " ",
+                modified = " ",
+                removed = " ",
+              },
+            },
+          },
+          lualine_c = {
+            {
+              "filename",
+              path = 1, -- relative path
+              symbols = {
+                modified = "  ",
+                readonly = "  ",
+                unnamed = "[No Name]",
+                newfile = "[New]",
+              },
+            },
+            { "diagnostics" },
+          },
+          lualine_x = {
+            {
+              "filetype",
+              icon_only = true,
+              separator = "",
+              padding = { left = 1, right = 0 },
+            },
+            {
+              function()
+                local msg = "No LSP"
+                local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+                if #buf_clients == 0 then
+                  return msg
+                end
+                local client_names = {}
+                for _, client in ipairs(buf_clients) do
+                  if client.name ~= "null-ls" then
+                    table.insert(client_names, client.name)
+                  end
+                end
+                return table.concat(client_names, ", ")
+              end,
+              icon = " LSP:",
+              color = { gui = "bold" },
+            },
+          },
+          lualine_y = {
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
+          },
+          lualine_z = {
+            {
+              function()
+                return os.date("%R")
+              end,
+              icon = "",
+            },
+          },
+        },
+        extensions = { "neo-tree", "lazy" },
+      })
+    end,
+  },
 }
