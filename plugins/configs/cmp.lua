@@ -105,7 +105,14 @@ local options = {
     }),
   },
   sources = {
-    { name = "nvim_lsp" },
+    {
+      name = "nvim_lsp",
+      entry_filter = function(entry, ctx)
+        -- Filter out items of kind 'Text'
+        local kind = require("cmp.types").lsp.CompletionItemKind[entry:get_kind()]
+        return kind ~= 'Text'
+      end
+    },
     -- { name = "luasnip" },
     -- { name = "buffer" },
     -- { name = "nvim_lua" },
