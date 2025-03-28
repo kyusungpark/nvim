@@ -79,7 +79,8 @@ local options = {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     },
-    ["<Tab>"] = cmp.mapping(function(fallback)
+
+    ["<S-tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif require("luasnip").expand_or_jumpable() then
@@ -91,7 +92,8 @@ local options = {
       "i",
       "s",
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+
+    ["<S-C-tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif require("luasnip").jumpable(-1) then
