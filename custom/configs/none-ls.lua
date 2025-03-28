@@ -7,7 +7,7 @@ local diagnostics = null_ls.builtins.diagnostics
 local sources = {
   -- JavaScript/TypeScript formatting
   require("none-ls.diagnostics.eslint_d"),
-  formatting.prettier,
+  formatting.prettierd,
 
   -- Go formatting
   formatting.gofumpt,

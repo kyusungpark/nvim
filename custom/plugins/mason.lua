@@ -7,7 +7,7 @@ return {
         "typescript-language-server",
         "eslint-lsp",
         "eslint_d",
-        "prettier",
+        "prettierd",
 
         -- GO
         "gopls",
