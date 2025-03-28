@@ -279,7 +279,17 @@ M.telescope = {
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
 
     -- git
-    ["<leader>gc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>gco"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>gc"] = {
+      function()
+        local message = vim.fn.input("Commit message: ")
+        if message ~= "" then
+          vim.cmd('!git commit -m "' .. message .. '"')
+        end
+      end,
+      "Git commit with message"
+    },
+    ["<leader>ga"] = { "<cmd> !git add . <CR>", "Git add all" },
     ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "Git status" },
     ["<leader>gl"] = { "<cmd> !git pull <CR>", "Git pull" },
     ["<leader>gp"] = { "<cmd> !git push <CR>", "Git push" },
