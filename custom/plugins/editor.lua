@@ -212,6 +212,87 @@ return {
     end,
   },
 
+  -- Buffer line (tabs)
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- Change from VimEnter to an earlier event to ensure it loads immediately
+    event = { "BufReadPost", "BufNewFile" },
+    priority = 1000, -- Give it high priority to load early
+    config = function()
+      -- Ensure termguicolors is enabled globally, not just in the plugin scope
+      vim.o.termguicolors = true
+
+      -- Set to use mouse for buffer operations
+      vim.o.mouse = "a"
+
+      require("bufferline").setup({
+        highlights = {
+          buffer_selected = { bold = true },
+          diagnostic_selected = { bold = true },
+          info_selected = { bold = true },
+          info_diagnostic_selected = { bold = true },
+          warning_selected = { bold = true },
+          warning_diagnostic_selected = { bold = true },
+          error_selected = { bold = true },
+          error_diagnostic_selected = { bold = true },
+        },
+        options = {
+          mode = "buffers",
+          numbers = "none", -- "none" | "ordinal" | "buffer_id"
+          close_command = "bdelete! %d", -- command to use when closing a buffer
+          right_mouse_command = "bdelete! %d", -- command to use on right mouse click
+          left_mouse_command = "buffer %d", -- command to use on left mouse click
+          middle_mouse_command = nil, -- command to use on middle mouse click
+          indicator = {
+            icon = '▎', -- this should be omitted if indicator style is not 'icon'
+            style = 'icon', -- 'icon' | 'underline' | 'none'
+          },
+          buffer_close_icon = '󰅖',
+          modified_icon = '●',
+          close_icon = '',
+          left_trunc_marker = '',
+          right_trunc_marker = '',
+          max_name_length = 18,
+          max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+          truncate_names = true, -- whether or not tab names should be truncated
+          tab_size = 18,
+          diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc"
+          diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local icon = level:match("error") and " " or " "
+            return " " .. icon .. count
+          end,
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              text_align = "center",
+              separator = true,
+            }
+          },
+          color_icons = true, -- whether or not to add the filetype icon highlights
+          show_buffer_icons = true, -- disable filetype icons for buffers
+          show_buffer_close_icons = true,
+          show_close_icon = true,
+          show_tab_indicators = true,
+          separator_style = "thick", -- "slant" | "thick" | "thin" | { 'any', 'any' }
+          enforce_regular_tabs = false,
+          always_show_bufferline = true,
+          hover = {
+            enabled = true,
+            delay = 200,
+            reveal = {'close'}
+          },
+        }
+      })
+
+      -- Keymappings for buffer navigation
+      vim.keymap.set('n', '<S-l>', '<Cmd>BufferLineCycleNext<CR>', { desc = "Next buffer" })
+      vim.keymap.set('n', '<S-h>', '<Cmd>BufferLineCyclePrev<CR>', { desc = "Previous buffer" })
+    end,
+  },
+
   -- Status line
   {
     "nvim-lualine/lualine.nvim",

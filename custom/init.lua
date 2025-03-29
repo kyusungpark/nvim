@@ -11,3 +11,8 @@ opt.cursorline = true     -- Highlight current line
 
 -- Clipboard
 opt.clipboard = "unnamedplus" -- Use system clipboard
+
+-- Bufferline
+vim.opt.termguicolors = true
+vim.opt.showtabline = 2
+vim.g.gui_use_tabline = 0
