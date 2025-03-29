@@ -106,6 +106,8 @@ local default_plugins = {
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "git")
       require("gitsigns").setup(opts)
+      -- Load gitsigns mappings explicitly to ensure they're available
+      require("core.utils").load_mappings("gitsigns")
     end,
   },
 
