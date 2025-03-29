@@ -36,8 +36,8 @@ M.general = {
     ["<C-c>"] = { "<cmd> %y+ <CR>", "Copy whole file" },
 
     -- line numbers
-    ["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
-    ["<leader>rn"] = { "<cmd> set rnu! <CR>", "Toggle relative number" },
+    -- ["<leader>n"] = { "<cmd> set nu! <CR>", "Toggle line number" },
+    -- ["<leader>rn"] = { "<cmd> set rnu! <CR>", "Toggle relative number" },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -113,22 +113,36 @@ M.tabufline = {
       "Close buffer",
     },
 
-    -- force close buffer without saving
-    ["<leader>X"] = {
+    -- alternative keybinding to close buffer
+    ["<leader>w"] = {
       function()
-        require("nvchad.tabufline").close_buffer(true)
+        -- Check if buffer has unsaved changes
+        local current_buf = vim.api.nvim_get_current_buf()
+        if vim.bo[current_buf].modified then
+          vim.api.nvim_echo({{"Buffer has unsaved changes. Use <leader>X to force close or <leader>xs to save and close.", "WarningMsg"}}, true, {})
+        else
+          require("nvchad.tabufline").close_buffer()
+        end
       end,
-      "Force close buffer",
+      "Close buffer",
     },
 
+    -- force close buffer without saving
+    -- ["<leader>X"] = {
+    --   function()
+    --     require("nvchad.tabufline").close_buffer(true)
+    --   end,
+    --   "Force close buffer",
+    -- },
+
     -- save and close buffer
-    ["<leader>xs"] = {
-      function()
-        vim.cmd("w")
-        require("nvchad.tabufline").close_buffer()
-      end,
-      "Save and close buffer",
-    },
+    -- ["<leader>xs"] = {
+    --   function()
+    --     vim.cmd("w")
+    --     require("nvchad.tabufline").close_buffer()
+    --   end,
+    --   "Save and close buffer",
+    -- },
   },
 }
 
@@ -250,26 +264,26 @@ M.lspconfig = {
       "Diagnostic setloclist",
     },
 
-    ["<leader>wa"] = {
-      function()
-        vim.lsp.buf.add_workspace_folder()
-      end,
-      "Add workspace folder",
-    },
+    -- ["<leader>wa"] = {
+    --   function()
+    --     vim.lsp.buf.add_workspace_folder()
+    --   end,
+    --   "Add workspace folder",
+    -- },
 
-    ["<leader>wr"] = {
-      function()
-        vim.lsp.buf.remove_workspace_folder()
-      end,
-      "Remove workspace folder",
-    },
+    -- ["<leader>wr"] = {
+    --   function()
+    --     vim.lsp.buf.remove_workspace_folder()
+    --   end,
+    --   "Remove workspace folder",
+    -- },
 
-    ["<leader>wl"] = {
-      function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end,
-      "List workspace folders",
-    },
+    -- ["<leader>wl"] = {
+    --   function()
+    --     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    --   end,
+    --   "List workspace folders",
+    -- },
   },
 
   v = {
@@ -367,14 +381,6 @@ M.nvterm = {
       "Toggle vertical term",
     },
 
-    -- new
-    ["<leader>h"] = {
-      function()
-        require("nvterm.terminal").new "horizontal"
-      end,
-      "New horizontal term",
-    },
-
     ["<leader>v"] = {
       function()
         -- Create a vertical terminal with custom width
@@ -386,7 +392,7 @@ M.nvterm = {
         end, 50)  -- Small delay to ensure terminal is created
         return open_term
       end,
-      "New vertical term (smaller width)",
+      "New vertical term",
     },
   },
 }
