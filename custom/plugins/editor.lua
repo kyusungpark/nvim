@@ -236,13 +236,13 @@ return {
             underline_fg = "special",      -- Use special color for underline
             italic = false,                -- No italic to emphasize underline
           },
-          diagnostic_selected = { bold = true, underline = true },
-          info_selected = { bold = true, underline = true },
-          info_diagnostic_selected = { bold = true, underline = true },
-          warning_selected = { bold = true, underline = true },
-          warning_diagnostic_selected = { bold = true, underline = true },
-          error_selected = { bold = true, underline = true },
-          error_diagnostic_selected = { bold = true, underline = true },
+          diagnostic_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          info_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          info_diagnostic_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          warning_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          warning_diagnostic_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          error_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
+          error_diagnostic_selected = { bold = true, underline = true, underline_fg = "#FF0000" },
         },
         options = {
           mode = "buffers",
