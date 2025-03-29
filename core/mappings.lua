@@ -371,9 +371,16 @@ M.nvterm = {
 
     ["<leader>v"] = {
       function()
-        require("nvterm.terminal").new "vertical"
+        -- Create a vertical terminal with custom width
+        local open_term = require("nvterm.terminal").new "vertical"
+        -- Resize the window to make it smaller (e.g., 60 columns)
+        vim.defer_fn(function()
+          local win = vim.api.nvim_get_current_win()
+          vim.api.nvim_win_set_width(win, 60)  -- Set to desired width
+        end, 50)  -- Small delay to ensure terminal is created
+        return open_term
       end,
-      "New vertical term",
+      "New vertical term (smaller width)",
     },
   },
 }
