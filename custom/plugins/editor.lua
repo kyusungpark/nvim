@@ -263,8 +263,13 @@ return {
             delay = 200,
             reveal = {'close'}
           },
+          -- Add these options for split windows
+          global_status = false, -- Set to false to have bufferline per window
         }
       })
+
+      -- Set showtabline to always show the tabline
+      vim.opt.showtabline = 2
 
       -- Keymappings for buffer navigation
       vim.keymap.set('n', '<S-l>', '<Cmd>BufferLineCycleNext<CR>', { desc = "Next buffer" })
