@@ -297,4 +297,40 @@ return {
       })
     end,
   },
+
+  -- Session management
+  {
+    "folke/persistence.nvim",
+    event = "VimEnter", -- Load on VimEnter instead of BufReadPre for earlier loading
+    opts = {
+      dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
+      options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" },
+      pre_save = nil,
+      save_empty = false,
+    },
+    config = function(_, opts)
+      require("persistence").setup(opts)
+
+      -- Save session when exiting Neovim
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function()
+          -- Save the session when leaving Vim
+          require("persistence").save()
+        end,
+      })
+
+      -- Auto-restore session on startup with a delay to ensure all is loaded
+      vim.defer_fn(function()
+        -- Only autoload if Neovim started without file arguments
+        if vim.fn.argc() == 0 then
+          require("persistence").load()
+        end
+      end, 100) -- Small delay to ensure everything is initialized
+    end,
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
+      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+    },
+  },
 }
