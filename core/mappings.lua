@@ -100,20 +100,6 @@ M.tabufline = {
     },
 
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
-      function()
-        -- Check if buffer has unsaved changes
-        local current_buf = vim.api.nvim_get_current_buf()
-        if vim.bo[current_buf].modified then
-          vim.api.nvim_echo({{"Buffer has unsaved changes. Use <leader>X to force close or <leader>xs to save and close.", "WarningMsg"}}, true, {})
-        else
-          require("nvchad.tabufline").close_buffer()
-        end
-      end,
-      "Close buffer",
-    },
-
-    -- alternative keybinding to close buffer
     ["<leader>w"] = {
       function()
         -- Check if buffer has unsaved changes
@@ -126,23 +112,6 @@ M.tabufline = {
       end,
       "Close buffer",
     },
-
-    -- force close buffer without saving
-    -- ["<leader>X"] = {
-    --   function()
-    --     require("nvchad.tabufline").close_buffer(true)
-    --   end,
-    --   "Force close buffer",
-    -- },
-
-    -- save and close buffer
-    -- ["<leader>xs"] = {
-    --   function()
-    --     vim.cmd("w")
-    --     require("nvchad.tabufline").close_buffer()
-    --   end,
-    --   "Save and close buffer",
-    -- },
   },
 }
 
@@ -155,14 +124,14 @@ M.comment = {
       function()
         require("Comment.api").toggle.linewise.current()
       end,
-      "Toggle comment",
+      "Comment",
     },
   },
 
   v = {
     ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      "Toggle comment",
+      "Comment",
     },
   },
 }
@@ -378,7 +347,7 @@ M.nvterm = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
-      "Toggle vertical term",
+      "Terminal",
     },
 
     ["<leader>v"] = {
