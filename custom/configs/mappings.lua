@@ -12,6 +12,7 @@ M.window = {
       ["<leader>sv"] = { "<cmd>vsplit<CR>", "Vertical split" },
       ["<leader>sh"] = { "<cmd>split<CR>", "Horizontal split" },
       ["<leader>sf"] = { "<C-w>w", "Focus next buffer/window" },
+      ["<leader>sw"] = { "<C-w>c", "Close current split" },
    },
 }
 
