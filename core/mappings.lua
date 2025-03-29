@@ -23,6 +23,12 @@ M.general = {
     ["<C-j>"] = { "<C-w>j", "Window down" },
     ["<C-k>"] = { "<C-w>k", "Window up" },
 
+    -- switch between windows with leader s
+    ["<leader>s1"] = { "<C-w>h", "Window left" },
+    ["<leader>s2"] = { "<C-w>l", "Window right" },
+    ["<leader>s3"] = { "<C-w>j", "Window down" },
+    ["<leader>s4"] = { "<C-w>k", "Window up" },
+
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
 
