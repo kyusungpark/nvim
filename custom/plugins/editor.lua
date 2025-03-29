@@ -296,6 +296,12 @@ return {
       -- Keymappings for buffer navigation
       vim.keymap.set('n', '<S-l>', '<Cmd>BufferLineCycleNext<CR>', { desc = "Next buffer" })
       vim.keymap.set('n', '<S-h>', '<Cmd>BufferLineCyclePrev<CR>', { desc = "Previous buffer" })
+
+      -- Add keymappings to go to specific buffer positions using leader key
+      vim.keymap.set('n', '<leader>b1', '<Cmd>BufferLineGoToBuffer 1<CR>', { desc = "Go to buffer 1" })
+      vim.keymap.set('n', '<leader>b2', '<Cmd>BufferLineGoToBuffer 2<CR>', { desc = "Go to buffer 2" })
+      vim.keymap.set('n', '<leader>b3', '<Cmd>BufferLineGoToBuffer 3<CR>', { desc = "Go to buffer 3" })
+      vim.keymap.set('n', '<leader>b4', '<Cmd>BufferLineGoToBuffer 4<CR>', { desc = "Go to buffer 4" })
     end,
   },
 
