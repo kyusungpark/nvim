@@ -229,14 +229,20 @@ return {
 
       require("bufferline").setup({
         highlights = {
-          buffer_selected = { bold = true },
-          diagnostic_selected = { bold = true },
-          info_selected = { bold = true },
-          info_diagnostic_selected = { bold = true },
-          warning_selected = { bold = true },
-          warning_diagnostic_selected = { bold = true },
-          error_selected = { bold = true },
-          error_diagnostic_selected = { bold = true },
+          buffer_selected = {
+            bold = true,
+            underline = true,              -- Add underline for active buffer
+            underline_style = "thick",     -- Make the underline thicker
+            underline_fg = "special",      -- Use special color for underline
+            italic = false,                -- No italic to emphasize underline
+          },
+          diagnostic_selected = { bold = true, underline = true },
+          info_selected = { bold = true, underline = true },
+          info_diagnostic_selected = { bold = true, underline = true },
+          warning_selected = { bold = true, underline = true },
+          warning_diagnostic_selected = { bold = true, underline = true },
+          error_selected = { bold = true, underline = true },
+          error_diagnostic_selected = { bold = true, underline = true },
         },
         options = {
           mode = "buffers",
@@ -247,7 +253,7 @@ return {
           middle_mouse_command = nil, -- command to use on middle mouse click
           indicator = {
             icon = '▎', -- this should be omitted if indicator style is not 'icon'
-            style = 'icon', -- 'icon' | 'underline' | 'none'
+            style = 'underline', -- Change from 'icon' to 'underline' for active buffer indicator
           },
           buffer_close_icon = '󰅖',
           modified_icon = '●',
