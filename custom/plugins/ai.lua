@@ -48,7 +48,7 @@ return {
       -- Set up keymappings for CopilotChat commands
       local keymap = vim.keymap.set
 
-      -- Use <leader>cc as the prefix for CopilotChat commands
+      -- Use <leader>c as the prefix for CopilotChat commands
       keymap("n", "<leader>co", ":CopilotChat<CR>", { desc = "CopilotChat - Open chat" })
       keymap("v", "<leader>co", ":CopilotChatVisual<CR>", { desc = "CopilotChat - Visual selection" })
       keymap("n", "<leader>ci", ":CopilotChatInPlace<CR>", { desc = "CopilotChat - In-place edit" })
