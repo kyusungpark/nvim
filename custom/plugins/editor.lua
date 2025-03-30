@@ -153,7 +153,7 @@ return {
         end
         return true
       end,
-      debounce_delay = 2000,
+      debounce_delay = 1000,
     },
     config = function(_, opts)
       -- Load the plugin

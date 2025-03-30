@@ -58,6 +58,17 @@ M.general = {
       end,
       "LSP formatting",
     },
+
+    -- Add custom terminal command execution
+    ["<leader>tc"] = {
+      function()
+        local command = vim.fn.input("Terminal command: ")
+        if command ~= "" then
+          vim.cmd('!' .. command)
+        end
+      end,
+      "Run custom terminal command"
+    },
   },
 
   t = {
