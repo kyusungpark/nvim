@@ -181,19 +181,26 @@ M.lspconfig = {
       "LSP implementation",
     },
 
-    ["<leader>ls"] = {
+    ["gr"] = {
       function()
-        vim.lsp.buf.signature_help()
+        vim.lsp.buf.references()
       end,
-      "LSP signature help",
+      "LSP references",
     },
 
-    ["<leader>ld"] = {
-      function()
-        vim.lsp.buf.type_definition()
-      end,
-      "LSP definition type",
-    },
+    -- ["<leader>ls"] = {
+    --   function()
+    --     vim.lsp.buf.signature_help()
+    --   end,
+    --   "LSP signature help",
+    -- },
+
+    -- ["<leader>ld"] = {
+    --   function()
+    --     vim.lsp.buf.type_definition()
+    --   end,
+    --   "LSP definition type",
+    -- },
 
     ["<leader>lr"] = {
       function()
@@ -209,18 +216,11 @@ M.lspconfig = {
       "LSP code action",
     },
 
-    ["gr"] = {
-      function()
-        vim.lsp.buf.references()
-      end,
-      "LSP references",
-    },
-
-    ["<leader>lf"] = {
+    ["<leader>le"] = {
       function()
         vim.diagnostic.open_float { border = "rounded" }
       end,
-      "Floating diagnostic",
+      "Error diagnostic",
     },
 
     ["[d"] = {
