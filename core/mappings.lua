@@ -188,21 +188,21 @@ M.lspconfig = {
       "LSP signature help",
     },
 
-    ["<leader>D"] = {
+    ["<leader>ld"] = {
       function()
         vim.lsp.buf.type_definition()
       end,
       "LSP definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<leader>lr"] = {
       function()
         require("nvchad.renamer").open()
       end,
       "LSP rename",
     },
 
-    ["<leader>ca"] = {
+    ["<leader>la"] = {
       function()
         vim.lsp.buf.code_action()
       end,
