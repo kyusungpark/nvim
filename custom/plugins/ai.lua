@@ -9,9 +9,9 @@ return {
       vim.g.copilot_no_tab_map = true  -- We'll manually map tab below
 
       -- TODO: Remove later Disable Copilot for Go files
-      vim.g.copilot_filetypes = {
-        ["go"] = false
-      }
+      -- vim.g.copilot_filetypes = {
+      --   ["go"] = false
+      -- }
 
       -- Use Tab to accept suggestions
       vim.api.nvim_set_keymap("i", "<Tab>", 'copilot#Accept("<Tab>")', { silent = true, expr = true })
