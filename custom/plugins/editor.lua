@@ -280,6 +280,25 @@ return {
       vim.keymap.set('n', '<leader>b2', '<Cmd>BufferLineGoToBuffer 2<CR>', { desc = "Go to buffer 2" })
       vim.keymap.set('n', '<leader>b3', '<Cmd>BufferLineGoToBuffer 3<CR>', { desc = "Go to buffer 3" })
       vim.keymap.set('n', '<leader>b4', '<Cmd>BufferLineGoToBuffer 4<CR>', { desc = "Go to buffer 4" })
+
+      -- Close all buffers but current one with a more robust approach
+      vim.keymap.set('n', '<leader>bw', function()
+        -- Get all buffer numbers
+        local buffers = vim.api.nvim_list_bufs()
+        local current = vim.api.nvim_get_current_buf()
+        local count = 0
+
+        -- Close each buffer except the current one
+        for _, buf in ipairs(buffers) do
+          if vim.api.nvim_buf_is_valid(buf) and buf ~= current and vim.bo[buf].buflisted then
+            vim.api.nvim_buf_delete(buf, { force = true })
+            count = count + 1
+          end
+        end
+
+        -- Show a message about how many buffers were closed
+        vim.notify("Closed " .. count .. " buffer(s)", vim.log.levels.INFO)
+      end, { desc = "Close all buffers except current" })
     end,
   },
 
